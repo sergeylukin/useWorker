@@ -1,4 +1,4 @@
-import isoworker from 'isoworker'
+import { createContext } from 'isoworker/esm/index'
 import { TRANSFERABLE_TYPE } from 'src/useWorker'
 import jobRunner from './jobRunner'
 import remoteDepsParser from './remoteDepsParser'
@@ -23,7 +23,7 @@ const createWorkerBlobUrl = (
   transferable: TRANSFERABLE_TYPE,
   localDeps: () => unknown[],
 ) => {
-  const [context] = isoworker.createContext(localDeps)
+  const [context] = createContext(localDeps)
   const blobCode = `
     ${remoteDepsParser(deps)};
     ${context}
